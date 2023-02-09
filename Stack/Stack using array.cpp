@@ -46,22 +46,45 @@ int pop(struct stack *s){
 }
 
 void display(struct stack *s){
-	for(int i=0;i<=s->top;i++){
-		printf("data are : %d\n",s->arr[i]);
+	for(int i=s->top;i>=0;i--){
+		printf("data at index %d : %d\n",s->top-i+1,s->arr[i]);
+		
 	}
 }
+
+void peek(struct stack *s,int i){
+	if(s->top-i+1<0){
+		printf("Not a valid number\n");
+	}
+	else{
+		int val = s->arr[s->top-i+1];
+		printf("The element is : %d ",val);
+	}
+	
+}
+
+void stackTop(struct stack *s){
+	int st = s->arr[s->top];
+	printf("The topmost element is : %d\n",st);
+}
+
+void stackBottom(struct stack *s){
+ int sb = s->arr[0];
+ printf("The bottommost element is : %d\n",sb);	
+}
+
 int main()
 {
-	int data,dec,val;
+	int data,dec,val,index;
 	
 	struct stack *s = (struct stack *)malloc(sizeof(struct stack));
 	s->size=6;
 	s->top=-1;
 	s->arr=(int *)malloc(s->size*(sizeof(int)));
 	
-	while(dec!=4){
+	while(dec!=7){
 		
-	printf("Enter 1 for push,2 for pop,3 for display,4 for exit:\n");
+	printf("Enter 1 for push,2 for pop,3 for display,4 for peek,5 for stackTop,6 for stackBottom,7 for exit:\n");
 	scanf("%d",&dec);
 	
 	switch(dec){
@@ -90,6 +113,20 @@ int main()
 				break;
 			}
 		case 4:
+			{
+				printf("Enter index:\n");
+				scanf("%d",&index);
+				peek(s,index);
+			}
+		case 5:
+			{
+				stackTop(s);
+			}
+		case 6:
+			{
+				stackBottom(s);
+			}
+		case 7:
 			{
 				break;
 			}
